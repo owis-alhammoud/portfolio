@@ -44,19 +44,23 @@ export default function Skills() {
             {Object.entries(categories).map(([cat, skills]) => (
               <div key={cat} className="space-y-4">
                 <h3 className="text-2xl font-semibold text-[var(--accent)]">{cat}</h3>
-                {skills.map((skill) => (
-                  <div key={skill.id} className="group">
-                    <div className="flex justify-between mb-1">
-                      <span>{skill.title}</span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {skills.map((skill) => (
+                    <div key={skill.id} className="flex flex-col items-center group">
+                      <div className="w-24 h-24 relative rounded-full">
+                        <div className="absolute inset-0 rounded-full bg-gray-200 dark:bg-gray-700" />
+                        <div
+                          className="absolute inset-0 rounded-full"
+                          style={{ background: `conic-gradient(var(--accent) ${skill.level}%, transparent 0)` }}
+                        />
+                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-gray-800 text-white hidden group-hover:block">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <span className="mt-2">{skill.title}</span>
                     </div>
-                    <div className="relative w-full bg-gray-200 dark:bg-gray-700 rounded h-3">
-                      <div className="bg-[var(--accent)] h-3 rounded" style={{ width: `${skill.level}%` }} />
-                      <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-gray-800 text-white hidden group-hover:block">
-                        {skill.level}%
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
           </div>
