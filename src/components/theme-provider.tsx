@@ -29,7 +29,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           {theme === 'light' ? 'Dark' : 'Light'} Mode
         </button>
       </header>
-      <main className="pt-16">{children}</main>
+      <main >{children}</main>
     </>
   );
 }

@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --bg-light: #ffffff;
+  --bg-light: #eeeeee;
   --text-light: #171717;
   --bg-dark: #0a0a0a;
   --text-dark: #ededed;
-  --accent-light: #38bdf8;
+  --accent-light: #3b82f6;
   --accent-dark: #84cc16;
 }
 
@@ -57,4 +57,34 @@ body {
 
 .float-animate {
   animation: float 8s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease forwards;
 }
