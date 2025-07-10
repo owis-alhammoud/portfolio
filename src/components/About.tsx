@@ -24,19 +24,22 @@ export default function About() {
       <div className="container mx-auto px-4 space-y-8">
         <h2 className="text-3xl font-bold text-center">About me</h2>
         <div className="grid gap-8 md:grid-cols-2">
-          <ul className="list-disc list-inside text-lg space-y-2">
-            <li>
-              I was born on
-              <a
-                href="https://goo.gl/maps/ziHfGdRhgPUruPG18"
-                className="text-[var(--accent)] underline mx-1"
-              >
-                syria-hama-mourk
-              </a>
-              in 30-1-2001 with syrian nationality
-            </li>
-            <li>I hope to be a positive influncer everywhere</li>
-          </ul>
+        <div className=" border-y p-4  border-dashed border-[var(--accent)] rounded-2xl bg-[var(--accent)]/10 flex items-center min-h-full">
+        <ul className="list-disc list-inside text-lg space-y-2">
+          <li>
+            I was born on
+            <a
+              href="https://goo.gl/maps/ziHfGdRhgPUruPG18"
+              className="text-[var(--accent)] mx-1"
+            >
+              syria-hama-mourk
+            </a>
+            in 30-1-2001 with syrian nationality
+          </li>
+          <li>I hope to be a positive influncer everywhere</li>
+        </ul>
+      </div>
+
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-[var(--accent)] text-center md:text-start">
               My Languages
