@@ -21,13 +21,15 @@ const TITLES = [
 
 export default function Hero() {
   const [info, setInfo] = useState<Info | null>(null);
+  const [loading, setLoading] = useState(true);
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
     fetch("https://aoueesah.pythonanywhere.com/api/info/")
       .then((res) => res.json())
       .then((data: Info[]) => setInfo(data[0]))
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   const [animClass, setAnimClass] = useState('slide-in');
@@ -44,10 +46,20 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, []);
+  if(loading)
+  {
+    return (<section className="h-screen flex items-center justify-center fade-in-up ">{loading && (
+      <div className="flex items-center justify-center w-80 h-80">
+        <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
+      </div>
+    )}</section>)
+  }
 
   return (
+    
     <section className="h-screen flex items-center justify-center fade-in-up ">
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 md:px-50">
+        
         {info && (
           <div className="flex flex-col items-center md:items-start">
             <Image
@@ -76,7 +88,7 @@ export default function Hero() {
           </div>
         )}
         <div className="text-center md:text-start max-w-2xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl">Hello, I'm:</h1>
+          <h1 className="text-2xl sm:text-4xl">Hello, I&apos;m:</h1>
           <h1 className={`text-4xl sm:text-7xl font-bold text-[var(--accent)] ${animClass} `}>
             {TITLES[titleIndex]}
           </h1>
