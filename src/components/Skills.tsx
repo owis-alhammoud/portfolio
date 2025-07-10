@@ -42,22 +42,22 @@ export default function Skills() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2">
             {Object.entries(categories).map(([cat, skills]) => (
-              <div key={cat} className="space-y-4">
+              <div key={cat} className="p-4 border-2 border-[var(--accent)] rounded-xl space-y-4">
                 <h3 className="text-2xl font-semibold text-[var(--accent)]">{cat}</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                   {skills.map((skill) => (
-                    <div key={skill.id} className="flex flex-col items-center group">
-                      <div className="w-24 h-24 relative rounded-full">
-                        <div className="absolute inset-0 rounded-full bg-gray-200 dark:bg-gray-700" />
-                        <div
-                          className="absolute inset-0 rounded-full"
-                          style={{ background: `conic-gradient(var(--accent) ${skill.level}%, transparent 0)` }}
-                        />
-                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-gray-800 text-white hidden group-hover:block">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <span className="mt-2">{skill.title}</span>
+                    <div key={skill.id} className="group relative w-24 h-24 mx-auto">
+                      <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700" />
+                      <div
+                        className="absolute inset-0 rounded-full"
+                        style={{ background: `conic-gradient(var(--accent) ${skill.level}%, transparent 0)` }}
+                      />
+                      <span className="absolute inset-0 flex items-center justify-center text-sm font-medium pointer-events-none">
+                        {skill.title}
+                      </span>
+                      <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-gray-800 text-white hidden group-hover:block">
+                        {skill.level}%
+                      </span>
                     </div>
                   ))}
                 </div>
