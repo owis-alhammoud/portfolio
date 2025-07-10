@@ -39,3 +39,22 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-10px, -10px);
+  }
+  50% {
+    transform: translate(10px, -10px);
+  }
+  75% {
+    transform: translate(10px, 10px);
+  }
+}
+
+.float-animate {
+  animation: float 8s ease-in-out infinite;
+}

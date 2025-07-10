@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
 interface Info {
   id: number;
@@ -10,11 +12,11 @@ interface Info {
 }
 
 const TITLES = [
-  "Hello, I'm Owis Alhammoud",
-  "Hello, I'm Software Engineer",
-  "I'm Flutter Developer",
-  "I'm Django Developer",
-  "I'm Node.js Developer",
+  "hello, I'm Owis Alhammoud",
+  "hello, I'm Software Engineer",
+  "hello, I'm Flutter Developer",
+  "hello, I'm Django Developer",
+  "hello, I'm Node.js Developer",
 ];
 
 export default function Hero() {
@@ -36,28 +38,42 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center text-center space-y-4 fade-in-up">
-      <h1 className="text-4xl sm:text-6xl font-bold text-[var(--accent)] transition-colors duration-500">
-        {TITLES[titleIndex]}
-      </h1>
-      {info && (
-        <>
-          <img
-            src={info.photo}
-            alt="Avatar"
-            className="w-40 h-40 rounded-full object-cover animate-pulse"
-          />
-          <p className="max-w-xl text-lg px-4">{info.welcomMSG}</p>
-          <div className="space-x-4">
-            <a href={`tel:${info.phoneNum}`} className="underline text-[var(--accent)]">
-              {info.phoneNum}
-            </a>
-            <a href={`mailto:${info.email}`} className="underline text-[var(--accent)]">
-              {info.email}
-            </a>
+    <section className="min-h-screen flex items-center justify-center fade-in-up">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 px-4">
+        {info && (
+          <div className="flex flex-col items-center md:items-start">
+            <Image
+              src={info.photo}
+              width={160}
+              height={160}
+              alt="Avatar"
+              className="rounded-full object-cover float-animate w-40 h-40"
+            />
+            <div className="mt-4 space-y-2">
+              <a
+                href={`tel:${info.phoneNum}`}
+                className="flex items-center space-x-2 underline"
+              >
+                <PhoneIcon className="w-5 h-5" />
+                <span>{info.phoneNum}</span>
+              </a>
+              <a
+                href={`mailto:${info.email}`}
+                className="flex items-center space-x-2 underline"
+              >
+                <EnvelopeIcon className="w-5 h-5" />
+                <span>{info.email}</span>
+              </a>
+            </div>
           </div>
-        </>
-      )}
+        )}
+        <div className="text-center md:text-left max-w-xl space-y-4">
+          <h1 className="text-4xl sm:text-5xl font-bold transition-opacity duration-700">
+            {TITLES[titleIndex]}
+          </h1>
+          {info && <p className="text-lg">{info.welcomMSG}</p>}
+        </div>
+      </div>
     </section>
   );
 }
