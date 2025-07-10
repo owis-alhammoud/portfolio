@@ -1,6 +1,9 @@
 'use client'
 import { useEffect } from 'react'
 import Hero from '@/components/Hero'
+import About from '@/components/About'
+import Languages from '@/components/Languages'
+import Skills from '@/components/Skills'
 
 export default function Home() {
   useEffect(() => {
@@ -19,6 +22,9 @@ export default function Home() {
   return (
     <div >
       <Hero />
+      <About />
+      <Languages />
+      <Skills />
 
     </div>
   )
