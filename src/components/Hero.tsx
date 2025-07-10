@@ -64,10 +64,11 @@ export default function Hero() {
           <div className="flex flex-col items-center md:items-start">
             <Image
               src={info.photo}
-              width={150}
-              height={150}
+              width={1000}
+              height={1000}
               alt="Avatar"
               className="rounded-full object-cover float-animate w-80 h-80 md:w-100 md:h-100"
+              priority
             />
             <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a
