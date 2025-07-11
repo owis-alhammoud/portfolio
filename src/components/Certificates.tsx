@@ -26,7 +26,7 @@ export default function Certificates() {
   }, []);
 
   return (
-    <section id="certificates" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section id="certificates" className="min-h-screen flex items-center justify-center ">
       <div className="container mx-auto px-4 text-center space-y-8">
         <h2 className="text-3xl font-bold">Certificates</h2>
         {loading ? (
@@ -34,11 +34,12 @@ export default function Certificates() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {certs.map((cert) => (
+              <a href={cert.img} target="_blank" rel="noopener noreferrer">
               <div
                 key={cert.id}
-                className="relative overflow-hidden rounded-xl border border-dashed p-4 transform transition-transform duration-300 hover:scale-105"
+                className="relative overflow-hidden rounded-xl border-x border-dashed p-4 transform transition-transform duration-300 hover:scale-105"
                 style={{ borderColor: "var(--accent)" }}
               >
                 <div className="absolute inset-0 bg-[var(--accent)]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
@@ -59,6 +60,7 @@ export default function Certificates() {
                   <p className="text-sm font-medium">Grade: {cert.grade}%</p>
                 </div>
               </div>
+              </a>
             ))}
           </div>
         )}
