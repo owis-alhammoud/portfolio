@@ -53,26 +53,36 @@ export default function Experience() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="relative py-12 overflow-x-auto">
-            <div className="absolute left-0 right-0 top-1/2 border-t-2 border-dashed" style={{ borderColor: 'var(--accent)' }} />
-            <ul className="flex space-x-8">
-              {experiences.map((exp) => {
-                const desc = exp.desc.replace(/\r\n/g, "\n");
-                const dur = formatDuration(exp.startDate, exp.endDate);
-                return (
-                  <li key={exp.id} className="relative flex-shrink-0 w-64 text-center">
-                    <div className="absolute left-1/2 top-1/2 w-4 h-4 bg-[var(--accent)] rounded-full -translate-x-1/2 -translate-y-1/2" />
-                    <div className="p-4 rounded-xl bg-[var(--accent)]/10 border border-dashed" style={{ borderColor: 'var(--accent)' }}>
-                      <h3 className="text-xl font-semibold text-[var(--accent)]">{exp.position}</h3>
-                      <p className="text-sm">{exp.companyName}</p>
-                      <p className="text-sm">{exp.startDate} - {exp.endDate} ({dur})</p>
-                      <p className="text-sm whitespace-pre-line">{desc}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+              <ul className="relative py-50 overflow-x-auto no-scrollbar flex -space-x-20">
+              <div className="absolute w-full left-0 right-0 top-1/2 border-t-2 border-[var(--accent)] -z-10  " />
+                {experiences.map((exp, index) => {
+                  const desc = exp.desc.replaceAll("\\r\\n", "\n");
+                  const dur = formatDuration(exp.startDate, exp.endDate);
+                  const isEven = index % 2 === 0;
+                  return (
+                    <li
+                      key={exp.id}
+                      className="min-w-full sm:min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 relative text-center"
+                    >
+                      <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-[var(--accent)] rounded-full -translate-x-1/2 -translate-y-1/2" />
+                      <div
+                        className={`${
+                          isEven ? "-translate-y-2/3" : "translate-y-2/3"
+                        } p-4 rounded-xl bg-[var(--accent)]/10 border border-dashed`}
+                        style={{ borderColor: "var(--accent)" }}
+                      >
+                        <h3 className="text-xl font-semibold text-[var(--accent)]">{exp.position}</h3>
+                        <p className="text-sm">{exp.companyName}</p>
+                        <p className="text-sm">
+                          {exp.startDate} - {exp.endDate} ({dur})
+                        </p>
+                        <p className="text-sm text-left whitespace-pre-line">{desc}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            
         )}
       </div>
     </section>
