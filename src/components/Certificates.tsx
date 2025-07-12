@@ -36,9 +36,8 @@ export default function Certificates() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {certs.map((cert) => (
-              <a href={cert.img} target="_blank" rel="noopener noreferrer">
+              <a key={cert.id} href={cert.img} target="_blank" rel="noopener noreferrer">
               <div
-                key={cert.id}
                 className="relative overflow-hidden rounded-xl border-x border-dashed p-4 transform transition-transform duration-300 hover:scale-105"
                 style={{ borderColor: "var(--accent)" }}
               >
