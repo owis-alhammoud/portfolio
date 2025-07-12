@@ -59,7 +59,7 @@ export default function Contests() {
                 {contests.map((contest) => (
                   <div
                     key={contest.id}
-                    className="relative min-w-full sm:min-w-1/2 lg:min-w-1/4 transform transition-transform duration-300 hover:z-10 hover:scale-105 snap-start border-x border-dashed rounded-xl p-4 bg-[var(--accent)]/10"
+                    className="relative min-w-full sm:min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 transform transition-transform duration-300 hover:z-10 hover:scale-105 snap-start border-x border-dashed rounded-xl p-4 bg-[var(--accent)]/10"
                     style={{ borderColor: 'var(--accent)', willChange: 'transform' }}
                   >
                     <a href={fromCorsUrl(contest.img)} target="_blank" rel="noopener noreferrer">

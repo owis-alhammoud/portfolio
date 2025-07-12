@@ -37,7 +37,7 @@ export default function Certificates() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 xl:grid-cols-4 md:grid-cols-2 lg:grid-cols-3">
             {certs.map((cert) => (
               <a key={cert.id} href={fromCorsUrl(cert.img)} target="_blank" rel="noopener noreferrer">
               <div

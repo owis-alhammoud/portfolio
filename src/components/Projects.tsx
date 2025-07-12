@@ -40,7 +40,7 @@ export default function Projects() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
+          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-3 ">
             {projects.map((project) => (
               <div
                 key={project.id}
