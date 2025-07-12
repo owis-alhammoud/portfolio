@@ -66,7 +66,7 @@ export default function Contests() {
                       <CachedImage
                         src={contest.img}
                         alt={contest.certificateName}
-                        className="w-full h-1/2 object-cover rounded"
+                        className="w-full h-10/16 object-cover rounded"
                       />
                     </a>
                     <div className="mt-2 space-y-1">
