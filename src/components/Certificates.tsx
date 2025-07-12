@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import CachedImage from "./CachedImage";
 
 interface Certificate {
   id: number;
@@ -18,32 +18,9 @@ export default function Certificates() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cached = localStorage.getItem("certificates-cache");
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached) as {
-          timestamp: number;
-          data: Certificate[];
-        };
-        if (Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
-          setCerts(parsed.data);
-          setLoading(false);
-          return;
-        }
-      } catch {
-        // ignore corrupted cache
-      }
-    }
-
     fetch("https://aoueesah.pythonanywhere.com/api/scintific-certificate/")
       .then((res) => res.json())
-      .then((data: Certificate[]) => {
-        setCerts(data);
-        localStorage.setItem(
-          "certificates-cache",
-          JSON.stringify({ timestamp: Date.now(), data })
-        );
-      })
+      .then((data: Certificate[]) => setCerts(data))
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -65,7 +42,7 @@ export default function Certificates() {
                 style={{ borderColor: "var(--accent)" }}
               >
                 <div className="absolute inset-0 bg-[var(--accent)]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                <Image
+                <CachedImage
                   src={cert.img}
                   alt={cert.certificateName}
                   width={600}

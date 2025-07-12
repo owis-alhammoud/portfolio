@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import CachedImage from "./CachedImage";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface TrainingCourse {
@@ -18,23 +18,6 @@ export default function TrainingCourses() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cached = localStorage.getItem("training-courses-cache");
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached) as {
-          timestamp: number;
-          data: TrainingCourse[];
-        };
-        if (Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
-          setCourses(parsed.data);
-          setLoading(false);
-          return;
-        }
-      } catch {
-        // ignore corrupted cache
-      }
-    }
-
     fetch("https://aoueesah.pythonanywhere.com/api/tranning-course/")
       .then((res) => res.json())
       .then((data: TrainingCourse[]) => {
@@ -42,10 +25,6 @@ export default function TrainingCourses() {
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
         setCourses(sorted);
-        localStorage.setItem(
-          "training-courses-cache",
-          JSON.stringify({ timestamp: Date.now(), data: sorted })
-        );
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -86,7 +65,7 @@ export default function TrainingCourses() {
                     style={{ borderColor: 'var(--accent)' }}
                   >
                     <a href={course.img} target="_blank" rel="noopener noreferrer">
-                      <Image
+                      <CachedImage
                         src={course.img}
                         alt={course.certificateName}
                         width={400}
