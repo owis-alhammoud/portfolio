@@ -25,9 +25,29 @@ export default function Hero() {
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
+    const cached = localStorage.getItem("hero-info-cache");
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached) as { timestamp: number; data: Info };
+        if (Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
+          setInfo(parsed.data);
+          setLoading(false);
+          return;
+        }
+      } catch {
+        // ignore corrupted cache
+      }
+    }
+
     fetch("https://aoueesah.pythonanywhere.com/api/info/")
       .then((res) => res.json())
-      .then((data: Info[]) => setInfo(data[0]))
+      .then((data: Info[]) => {
+        setInfo(data[0]);
+        localStorage.setItem(
+          "hero-info-cache",
+          JSON.stringify({ timestamp: Date.now(), data: data[0] })
+        );
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

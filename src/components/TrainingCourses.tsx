@@ -18,15 +18,35 @@ export default function TrainingCourses() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const cached = localStorage.getItem("training-courses-cache");
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached) as {
+          timestamp: number;
+          data: TrainingCourse[];
+        };
+        if (Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
+          setCourses(parsed.data);
+          setLoading(false);
+          return;
+        }
+      } catch {
+        // ignore corrupted cache
+      }
+    }
+
     fetch("https://aoueesah.pythonanywhere.com/api/tranning-course/")
       .then((res) => res.json())
-      .then((data: TrainingCourse[]) =>
-        setCourses(
-          data.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          )
-        )
-      )
+      .then((data: TrainingCourse[]) => {
+        const sorted = data.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        setCourses(sorted);
+        localStorage.setItem(
+          "training-courses-cache",
+          JSON.stringify({ timestamp: Date.now(), data: sorted })
+        );
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

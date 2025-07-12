@@ -18,9 +18,32 @@ export default function Certificates() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const cached = localStorage.getItem("certificates-cache");
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached) as {
+          timestamp: number;
+          data: Certificate[];
+        };
+        if (Date.now() - parsed.timestamp < 24 * 60 * 60 * 1000) {
+          setCerts(parsed.data);
+          setLoading(false);
+          return;
+        }
+      } catch {
+        // ignore corrupted cache
+      }
+    }
+
     fetch("https://aoueesah.pythonanywhere.com/api/scintific-certificate/")
       .then((res) => res.json())
-      .then((data: Certificate[]) => setCerts(data))
+      .then((data: Certificate[]) => {
+        setCerts(data);
+        localStorage.setItem(
+          "certificates-cache",
+          JSON.stringify({ timestamp: Date.now(), data })
+        );
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
