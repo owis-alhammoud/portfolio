@@ -7,6 +7,7 @@ import Certificates from '@/components/Certificates'
 import TrainingCourses from '@/components/TrainingCourses'
 import Contests from '@/components/Contests'
 import Projects from '@/components/Projects'
+import Experience from '@/components/Experience'
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
+      <Experience />
       <Certificates />
       <TrainingCourses />
       <Contests />
