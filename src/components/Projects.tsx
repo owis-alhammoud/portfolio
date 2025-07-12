@@ -40,18 +40,20 @@ export default function Projects() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
             {projects.map((project) => (
               <div
                 key={project.id}
                 className="relative overflow-hidden rounded-xl border-x border-dashed p-4 bg-[var(--accent)]/10 cursor-pointer"
-                onClick={() => window.open(fromCorsUrl(project.img), '_blank')}
                 style={{ borderColor: 'var(--accent)' }}
               >
+
                 <CachedImage
                   src={project.img}
                   alt={project.title}
                   className="w-full aspect-square object-cover rounded"
+                  onClick={() => window.open(fromCorsUrl(project.img), '_blank')}
+
                 />
                 <div className="mt-2 space-y-1">
                   <h3 className="text-xl font-semibold text-[var(--accent)]">
