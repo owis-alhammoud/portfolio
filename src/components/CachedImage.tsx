@@ -14,6 +14,7 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
       setImgSrc(cached);
       return;
     }
+
     fetch(src)
       .then((res) => res.blob())
       .then((blob) => {
@@ -29,7 +30,12 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
         };
         reader.readAsDataURL(blob);
       })
-      .catch(() => {});
+      .catch(() => {
+        // failed to fetch due to CORS or network, fall back to original src
+        if (typeof src === "string") {
+          setImgSrc(src);
+        }
+      });
   }, [src]);
 
   return <Image src={imgSrc} alt={alt} {...rest} />;
