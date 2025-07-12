@@ -5,6 +5,7 @@ import About from '@/components/About'
 import Skills from '@/components/Skills'
 import Certificates from '@/components/Certificates'
 import TrainingCourses from '@/components/TrainingCourses'
+import Contests from '@/components/Contests'
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
       <Skills />
       <Certificates />
       <TrainingCourses />
+      <Contests />
 
     </div>
   )
