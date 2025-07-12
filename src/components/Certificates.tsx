@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
+import { toCorsUrl } from "../utils/url";
 
 interface Certificate {
   id: number;
@@ -20,7 +21,9 @@ export default function Certificates() {
   useEffect(() => {
     fetch("https://aoueesah.pythonanywhere.com/api/scintific-certificate/")
       .then((res) => res.json())
-      .then((data: Certificate[]) => setCerts(data))
+      .then((data: Certificate[]) =>
+        setCerts(data.map((c) => ({ ...c, img: toCorsUrl(c.img) })))
+      )
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -36,14 +39,14 @@ export default function Certificates() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {certs.map((cert) => (
-              <a key={cert.id} href={cert.img} target="_blank" rel="noopener noreferrer">
+              <a key={cert.id} href={toCorsUrl(cert.img)} target="_blank" rel="noopener noreferrer">
               <div
                 className="relative overflow-hidden rounded-xl border-x border-dashed p-4 transform transition-transform duration-300 hover:scale-105"
                 style={{ borderColor: "var(--accent)" }}
               >
                 <div className="absolute inset-0 bg-[var(--accent)]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
                 <CachedImage
-                  src={cert.img}
+                  src={toCorsUrl(cert.img)}
                   alt={cert.certificateName}
                   width={600}
                   height={400}

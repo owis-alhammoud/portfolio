@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import CachedImage from "./CachedImage";
+import { toCorsUrl } from "../utils/url";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface TrainingCourse {
@@ -24,7 +25,9 @@ export default function TrainingCourses() {
         const sorted = data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
-        setCourses(sorted);
+        setCourses(
+          sorted.map((c) => ({ ...c, img: toCorsUrl(c.img) }))
+        );
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -64,9 +67,9 @@ export default function TrainingCourses() {
                     className="border-x border-dashed rounded-xl p-4 bg-[var(--accent)]/10 snap-start"
                     style={{ borderColor: 'var(--accent)' }}
                   >
-                    <a href={course.img} target="_blank" rel="noopener noreferrer">
+                    <a href={toCorsUrl(course.img)} target="_blank" rel="noopener noreferrer">
                       <CachedImage
-                        src={course.img}
+                        src={toCorsUrl(course.img)}
                         alt={course.certificateName}
                         width={400}
                         height={300}
