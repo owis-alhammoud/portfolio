@@ -71,6 +71,7 @@ export default function TrainingCourses() {
                         alt={course.certificateName}
                         width={400}
                         height={300}
+                        loading="lazy"
                         className="w-full h-40 object-cover rounded"
                       />
                     </a>

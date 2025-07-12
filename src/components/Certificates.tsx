@@ -47,6 +47,7 @@ export default function Certificates() {
                   alt={cert.certificateName}
                   width={600}
                   height={400}
+                  loading="lazy"
                   className="w-full h-48 object-cover rounded"
                 />
                 <div className="mt-4 space-y-1 relative">

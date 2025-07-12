@@ -67,8 +67,8 @@ export default function Hero() {
               width={1000}
               height={1000}
               alt="Avatar"
+              loading="lazy"
               className="rounded-full object-cover float-animate w-80 h-80 md:w-100 md:h-100"
-              priority
             />
             <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a
