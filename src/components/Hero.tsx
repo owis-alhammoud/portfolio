@@ -68,12 +68,9 @@ export default function Hero() {
         {info && (
           <div className="flex flex-col items-center md:items-start">
             <CachedImage
-              src={toCorsUrl(info.photo)}
-              width={1000}
-              height={1000}
+              src={info.photo}
               alt="Avatar"
-              loading="lazy"
-              className="rounded-full object-cover float-animate w-80 h-80 md:w-100 md:h-100"
+              className="rounded-full object-cover float-animate w-full h-1/2"
             />
             <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a

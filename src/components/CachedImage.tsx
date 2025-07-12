@@ -8,10 +8,11 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
 
   useEffect(() => {
     if (typeof src !== "string") return;
-    const key = `img-cache:${src}`;
+    const key = `${src}`;
     const cached = localStorage.getItem(key);
     if (cached) {
       setImgSrc(cached);
+      console.log("get from cached "+src)
       return;
     }
 
@@ -23,6 +24,8 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
           const base64 = reader.result as string;
           try {
             localStorage.setItem(key, base64);
+            console.log("saved cached "+src)
+
           } catch {
             // storage full or disabled
           }
@@ -38,5 +41,5 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
       });
   }, [src]);
 
-  return <Image src={imgSrc} alt={alt} {...rest} />;
+  return <Image width={1000}   height={1000}  loading="lazy" src={imgSrc} alt={alt} {...rest} />;
 }

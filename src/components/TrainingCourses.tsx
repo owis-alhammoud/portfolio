@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import CachedImage from "./CachedImage";
-import { toCorsUrl } from "../utils/url";
+import { toCorsUrl, fromCorsUrl } from "../utils/url";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface TrainingCourse {
@@ -42,39 +42,35 @@ export default function TrainingCourses() {
   };
 
   return (
-    <section id="training" className="min-h-screen flex items-center justify-center fade-in-up">
-      <div className="container mx-auto px-4 space-y-8">
+    <section id="training" className="min-h-screen flex flex-col overflow-visible items-center justify-center fade-in-up">
+      <div className="container mx-auto space-y-8 overflow-visible">
         <h2 className="text-3xl font-bold text-center">Training Courses</h2>
         {loading ? (
           <div className="flex items-center justify-center w-20 h-20 mx-auto">
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="relative">
+          <div className="flex items-stretch overflow-visible ">
             <button
               onClick={scrollLeft}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--accent)] text-[var(--bg)] p-2 rounded-full hover:opacity-80"
+              className="hover:text-[var(--bg)] hover:opacity-25 hover:bg-[var(--accent)] text-[var(--accent)] p-2 rounded-l opacity-50  self-stretch"
             >
-              <ChevronLeftIcon className="w-5 h-5" />
+              <ChevronLeftIcon className="w-5 h-15" />
             </button>
-            <div ref={listRef} className="overflow-x-scroll no-scrollbar">
-              <div
-                className="grid grid-flow-col gap-4 pb-4 auto-cols-[100%] sm:auto-cols-[50%] lg:auto-cols-[25%] snap-x"
-              >
+
+            <div ref={listRef} className="overflow-x-scroll py-10 no-scrollbar flex-1 overflow-visible">
+              <div className="flex gap-4 snap-x  overflow-visible relative">
                 {courses.map((course) => (
                   <div
                     key={course.id}
-                    className="border-x border-dashed rounded-xl p-4 bg-[var(--accent)]/10 snap-start"
-                    style={{ borderColor: 'var(--accent)' }}
+                    className="relative min-w-full sm:min-w-1/2 lg:min-w-1/4 transform transition-transform duration-300 hover:z-10 hover:scale-105 snap-start border-x border-dashed rounded-xl p-4 bg-[var(--accent)]/10"
+                    style={{ borderColor: 'var(--accent)', willChange: 'transform'}}
                   >
-                    <a href={toCorsUrl(course.img)} target="_blank" rel="noopener noreferrer">
+                    <a href={fromCorsUrl(course.img)} target="_blank" rel="noopener noreferrer">
                       <CachedImage
-                        src={toCorsUrl(course.img)}
+                        src={course.img}
                         alt={course.certificateName}
-                        width={400}
-                        height={300}
-                        loading="lazy"
-                        className="w-full h-40 object-cover rounded"
+                        className="w-full h-1/2 object-cover rounded"
                       />
                     </a>
                     <div className="mt-2 space-y-1">
@@ -89,13 +85,15 @@ export default function TrainingCourses() {
                 ))}
               </div>
             </div>
+
             <button
               onClick={scrollRight}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--accent)] text-[var(--bg)] p-2 rounded-full hover:opacity-80"
+              className="text-[var(--accent)] p-2 rounded-r hover:text-[var(--bg)] hover:opacity-25 hover:bg-[var(--accent)] self-stretch"
             >
               <ChevronRightIcon className="w-5 h-5" />
             </button>
           </div>
+
         )}
       </div>
     </section>

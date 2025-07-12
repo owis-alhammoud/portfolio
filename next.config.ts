@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'aoueesah.pythonanywhere.com',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'aoueesah.pythonanywhere.com',
+        pathname: '/api/media-cors/**',
+      },
     ],
   },};
 
