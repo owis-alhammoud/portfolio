@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
-import { toCorsUrl } from "../utils/url";
+import { toCorsUrl, fromCorsUrl } from "../utils/url";
 
 interface Tag {
   id: number;
@@ -40,20 +40,19 @@ export default function Projects() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="relative overflow-hidden rounded-xl border-x border-dashed p-4 bg-[var(--accent)]/10"
+                className="relative overflow-hidden rounded-xl border-x border-dashed p-4 bg-[var(--accent)]/10 cursor-pointer"
+                onClick={() => window.open(fromCorsUrl(project.img), '_blank')}
                 style={{ borderColor: 'var(--accent)' }}
               >
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
-                  <CachedImage
-                    src={project.img}
-                    alt={project.title}
-                    className="w-full h-1/2 object-cover rounded"
-                  />
-                </a>
+                <CachedImage
+                  src={project.img}
+                  alt={project.title}
+                  className="w-full aspect-square object-cover rounded"
+                />
                 <div className="mt-2 space-y-1">
                   <h3 className="text-xl font-semibold text-[var(--accent)]">
                     {project.title}
@@ -63,7 +62,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag.id}
-                        className="text-xs px-2 py-1 rounded bg-[var(--accent)] text-[var(--bg)]"
+                        className="text-xs px-2 py-1 rounded-full bg-[var(--accent)] text-[var(--bg)]"
                       >
                         {tag.title}
                       </span>
