@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import CachedImage from "./CachedImage";
+import { toCorsUrl } from "../utils/url";
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
 interface Info {
@@ -27,7 +28,11 @@ export default function Hero() {
   useEffect(() => {
     fetch("https://aoueesah.pythonanywhere.com/api/info/")
       .then((res) => res.json())
-      .then((data: Info[]) => setInfo(data[0]))
+      .then((data: Info[]) => {
+        const first = data[0];
+        if (first) first.photo = toCorsUrl(first.photo);
+        setInfo(first);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -62,13 +67,10 @@ export default function Hero() {
         
         {info && (
           <div className="flex flex-col items-center md:items-start">
-            <Image
+            <CachedImage
               src={info.photo}
-              width={1000}
-              height={1000}
               alt="Avatar"
-              className="rounded-full object-cover float-animate w-80 h-80 md:w-100 md:h-100"
-              priority
+              className="rounded-full object-cover float-animate w-full h-1/2"
             />
             <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a

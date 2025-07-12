@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import CachedImage from "./CachedImage";
+import { toCorsUrl, fromCorsUrl } from "../utils/url";
 
 interface Certificate {
   id: number;
@@ -20,14 +21,16 @@ export default function Certificates() {
   useEffect(() => {
     fetch("https://aoueesah.pythonanywhere.com/api/scintific-certificate/")
       .then((res) => res.json())
-      .then((data: Certificate[]) => setCerts(data))
+      .then((data: Certificate[]) =>
+        setCerts(data.map((c) => ({ ...c, img: toCorsUrl(c.img) })))
+      )
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
   return (
     <section id="certificates" className="min-h-screen flex items-center justify-center ">
-      <div className="container mx-auto px-4 text-center space-y-8">
+      <div className=" container mx-auto px-4 text-center space-y-8">
         <h2 className="text-3xl font-bold">Certificates</h2>
         {loading ? (
           <div className="flex items-center justify-center w-20 h-20 mx-auto">
@@ -36,19 +39,17 @@ export default function Certificates() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {certs.map((cert) => (
-              <a href={cert.img} target="_blank" rel="noopener noreferrer">
+              <a key={cert.id} href={fromCorsUrl(cert.img)} target="_blank" rel="noopener noreferrer">
               <div
-                key={cert.id}
-                className="relative overflow-hidden rounded-xl border-x border-dashed p-4 transform transition-transform duration-300 hover:scale-105"
+                className="relative overflow-hidden rounded-xl border-x border-dashed p-5 transform transition-transform duration-300 hover:scale-105"
                 style={{ borderColor: "var(--accent)" }}
               >
                 <div className="absolute inset-0 bg-[var(--accent)]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                <Image
+                <CachedImage
                   src={cert.img}
                   alt={cert.certificateName}
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover rounded"
+                  
+                  className="w-full h-1/2 object-cover rounded"
                 />
                 <div className="mt-4 space-y-1 relative">
                   <h3 className="text-xl font-semibold text-[var(--accent)]">{cert.certificateName}</h3>
