@@ -53,24 +53,26 @@ export default function Experience() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-              <ul className="relative py-50 overflow-x-auto no-scrollbar flex -space-x-20">
+          <div className="relative overflow-hidden">
+
               <div className="absolute w-full left-0 right-0 top-1/2 border-t-2 border-[var(--accent)] -z-10  " />
+              <ul className=" py-50 overflow-x-auto no-scrollbar flex -space-x-20">
                 {experiences.map((exp, index) => {
                   const desc = exp.desc.replaceAll("\\r\\n", "\n");
                   const dur = formatDuration(exp.startDate, exp.endDate);
                   const isEven = index % 2 === 0;
                   return (
                     <li
-                      key={exp.id}
+                    key={exp.id}
                       className="min-w-full sm:min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 relative text-center"
-                    >
+                      >
                       <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-[var(--accent)] rounded-full -translate-x-1/2 -translate-y-1/2" />
                       <div
                         className={`${
                           isEven ? "-translate-y-2/3" : "translate-y-2/3"
-                        } p-4 rounded-xl bg-[var(--accent)]/10 border border-dashed`}
+                        } p-4 rounded-xl bg-[var(--accent)]/10 border border-dashed transform transition-transform duration-300 hover:z-10 hover:scale-105`}
                         style={{ borderColor: "var(--accent)" }}
-                      >
+                        >
                         <h3 className="text-xl font-semibold text-[var(--accent)]">{exp.position}</h3>
                         <p className="text-sm">{exp.companyName}</p>
                         <p className="text-sm">
@@ -82,6 +84,7 @@ export default function Experience() {
                   );
                 })}
               </ul>
+            </div>
             
         )}
       </div>
