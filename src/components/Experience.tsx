@@ -75,9 +75,10 @@ export default function Experience() {
                         >
                         <h3 className="text-xl font-semibold text-[var(--accent)]">{exp.position}</h3>
                         <p className="text-sm">{exp.companyName}</p>
-                        <p className="text-sm">
-                          {exp.startDate} - {exp.endDate} ({dur})
+                        <p className="text-md">
+                          {`${new Date(exp.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric',}) } --> ${new Date(exp.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric',})} `}
                         </p>
+                        <p className="text-sm text-[var(--accent)] opacity-80 text-right">( {dur} )</p>
                         <p className="text-sm text-left whitespace-pre-line">{desc}</p>
                       </div>
                     </li>
