@@ -31,10 +31,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
-    { id: 'certificates', label: 'Certificates' },
     { id: 'training', label: 'Training' },
-    { id: 'contests', label: 'Contests' },
     { id: 'projects', label: 'Projects' },
+    { id: 'contests', label: 'Contests' },
+    { id: 'certificates', label: 'Certificates' },
   ];
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');

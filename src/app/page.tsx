@@ -29,10 +29,10 @@ export default function Home() {
       <About />
       <Skills />
       <Experience />
-      <Certificates />
       <TrainingCourses />
-      <Contests />
       <Projects />
+      <Contests />
+      <Certificates />
 
     </div>
   )
