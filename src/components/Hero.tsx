@@ -12,6 +12,12 @@ interface Info {
   welcomMSG: string;
 }
 
+interface Social {
+  id: number;
+  icon: string;
+  url: string;
+}
+
 const TITLES = [
   "Owis Alhammoud",
   "Software Engineer",
@@ -22,16 +28,26 @@ const TITLES = [
 
 export default function Hero() {
   const [info, setInfo] = useState<Info | null>(null);
+  const [socials, setSocials] = useState<Social[]>([]);
   const [loading, setLoading] = useState(true);
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/info/")
-      .then((res) => res.json())
-      .then((data: Info[]) => {
-        const first = data[0];
+    Promise.all([
+      fetch("https://aoueesah.pythonanywhere.com/api/info/").then((res) =>
+        res.json()
+      ),
+      fetch("https://aoueesah.pythonanywhere.com/api/social-network/").then((res) =>
+        res.json()
+      ),
+    ])
+      .then(([infoData, socialData]: [Info[], Social[]]) => {
+        const first = infoData[0];
         if (first) first.photo = toCorsUrl(first.photo);
         setInfo(first);
+        setSocials(
+          socialData.map((s) => ({ ...s, icon: toCorsUrl(s.icon) }))
+        );
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -88,6 +104,15 @@ export default function Hero() {
                 <span className="text-[var(--accent)]">{info.email}</span>
               </a>
             </div>
+            {socials.length > 0 && (
+              <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-2">
+                {socials.map((s) => (
+                  <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer">
+                    <CachedImage src={s.icon} alt="icon" className="w-6 h-6" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         )}
         <div className="text-center md:text-start max-w-2xl mx-auto">
