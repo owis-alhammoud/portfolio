@@ -1,5 +1,11 @@
 "use client";
 import { useEffect, useState, ReactNode } from "react";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  MoonIcon,
+  SunIcon,
+} from "@heroicons/react/24/outline";
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -45,17 +51,18 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           ))}
           <button
             onClick={toggleTheme}
-            className="px-3 py-1 rounded bg-[var(--accent)] text-[var(--bg)] ml-2"
+            aria-label="Toggle theme"
+            className="p-2 rounded-full bg-[var(--accent)] text-[var(--bg)] ml-2"
           >
-            {theme === 'light' ? 'Dark' : 'Light'} Mode
-          </button>
+            {theme === 'light' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}  </button>
         </nav>
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="px-2 py-1 border rounded"
+            aria-label="Toggle navigation menu"
+            className="p-2 border rounded"
           >
-            {menuOpen ? 'Close' : 'Menu'}
+            {menuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
           </button>
         </div>
       </header>
@@ -76,9 +83,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
               toggleTheme();
               setMenuOpen(false);
             }}
-            className="w-full px-3 py-1 rounded bg-[var(--accent)] text-[var(--bg)]"
+            aria-label="Toggle theme"
+            className="w-full flex justify-center py-2 rounded bg-[var(--accent)] text-[var(--bg)]"
           >
-            {theme === 'light' ? 'Dark' : 'Light'} Mode
+            {theme === 'light' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
           </button>
         </nav>
       )}
