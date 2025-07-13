@@ -39,5 +39,5 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
       });
   }, [src]);
 
-  return <Image width={1000}   height={1000}  loading="lazy" src={imgSrc} alt={alt} {...rest} />;
+  return <Image unoptimized width={1000}   height={1000}  loading="lazy" src={imgSrc} alt={alt} {...rest} />;
 }
