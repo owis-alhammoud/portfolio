@@ -69,7 +69,7 @@ export default function Hero() {
   }, []);
   if(loading)
   {
-    return (<section className="h-screen flex items-center justify-center fade-in-up ">{loading && (
+    return (<section id="home" className="h-screen flex items-center justify-center fade-in-up ">{loading && (
       <div className="flex items-center justify-center w-80 h-80">
         <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
       </div>
@@ -78,7 +78,7 @@ export default function Hero() {
 
   return (
     
-    <section className="h-screen flex items-center justify-center fade-in-up ">
+    <section id="home" className="h-screen flex items-center justify-center fade-in-up ">
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 md:px-50">
         
         {info && (
