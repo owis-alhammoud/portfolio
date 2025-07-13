@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
+import { cachedFetch } from "../utils/cachedFetch";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface TrainingCourse {
@@ -19,9 +20,8 @@ export default function TrainingCourses() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/tranning-course/")
-      .then((res) => res.json())
-      .then((data: TrainingCourse[]) => {
+    cachedFetch<TrainingCourse[]>("https://aoueesah.pythonanywhere.com/api/tranning-course/", 86400)
+      .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
+import { cachedFetch } from "../utils/cachedFetch";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 interface Contest {
@@ -18,9 +19,8 @@ export default function Contests() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/contest/")
-      .then((res) => res.json())
-      .then((data: Contest[]) => {
+    cachedFetch<Contest[]>("https://aoueesah.pythonanywhere.com/api/contest/", 86400)
+      .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
