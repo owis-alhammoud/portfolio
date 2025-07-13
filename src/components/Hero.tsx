@@ -86,7 +86,7 @@ export default function Hero() {
             <CachedImage
               src={info.photo}
               alt="Avatar"
-              className="rounded-full object-cover float-animate w-full h-1/2"
+              className="rounded-full md:p-0 p-10 object-cover float-animate w-full h-1/2"
             />
             <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a
