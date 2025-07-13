@@ -28,13 +28,13 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 
   const links = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
+    { id: 'about', label: 'About me' },
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
-    { id: 'training', label: 'Training' },
+    { id: 'training', label: 'Training Courses' },
     { id: 'projects', label: 'Projects' },
     { id: 'contests', label: 'Contests' },
-    { id: 'certificates', label: 'Certificates' },
+    { id: 'certificates', label: 'Scientific Certificates' },
   ];
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');

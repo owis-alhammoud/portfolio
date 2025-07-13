@@ -31,7 +31,7 @@ export default function Certificates() {
   return (
     <section id="certificates" className="min-h-screen flex items-center justify-center ">
       <div className=" container mx-auto px-4 text-center space-y-8">
-        <h2 className="text-3xl font-bold">Certificates</h2>
+        <h2 className="text-3xl font-bold">Scientific Certificates</h2>
         {loading ? (
           <div className="flex items-center justify-center w-20 h-20 mx-auto">
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
