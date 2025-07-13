@@ -33,7 +33,7 @@ export default function Experience() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    cachedFetch<Experience[]>("https://aoueesah.pythonanywhere.com/api/experience/", 86400)
+    cachedFetch<Experience[]>("https://aoueesah.pythonanywhere.com/api/experience/", )
       .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime()

@@ -20,7 +20,7 @@ export default function TrainingCourses() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cachedFetch<TrainingCourse[]>("https://aoueesah.pythonanywhere.com/api/tranning-course/", 86400)
+    cachedFetch<TrainingCourse[]>("https://aoueesah.pythonanywhere.com/api/tranning-course/", )
       .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()

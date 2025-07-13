@@ -1,4 +1,4 @@
-export async function cachedFetch<T>(url: string, ttlSeconds = 3600): Promise<T> {
+export async function cachedFetch<T>(url: string, ttlSeconds = 86400): Promise<T> {
   const key = `cache:${url}`;
 
   if (typeof localStorage !== 'undefined') {

@@ -13,7 +13,7 @@ export default function About() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cachedFetch<Language[]>("https://aoueesah.pythonanywhere.com/api/lang/", 86400)
+    cachedFetch<Language[]>("https://aoueesah.pythonanywhere.com/api/lang/",)
       .then((data) => setLangs(data))
       .catch(() => {})
       .finally(() => setLoading(false));

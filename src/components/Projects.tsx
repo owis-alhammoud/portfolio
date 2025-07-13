@@ -23,7 +23,7 @@ export default function Projects() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cachedFetch<Project[]>("https://aoueesah.pythonanywhere.com/api/project/", 86400)
+    cachedFetch<Project[]>("https://aoueesah.pythonanywhere.com/api/project/", )
       .then((data) =>
         setProjects(data.map((p) => ({ ...p, img: toCorsUrl(p.img) })))
       )

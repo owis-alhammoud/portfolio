@@ -22,7 +22,6 @@ export default function Certificates() {
   useEffect(() => {
     cachedFetch<Certificate[]>(
       "https://aoueesah.pythonanywhere.com/api/scintific-certificate/",
-      86400
     )
       .then((data) =>
         setCerts(data.map((c) => ({ ...c, img: toCorsUrl(c.img) })))

@@ -24,7 +24,7 @@ export default function Skills() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cachedFetch<Skill[]>("https://aoueesah.pythonanywhere.com/api/skill/", 86400)
+    cachedFetch<Skill[]>("https://aoueesah.pythonanywhere.com/api/skill/", )
       .then((data) => setSkills(data))
       .catch(() => {})
       .finally(() => setLoading(false));

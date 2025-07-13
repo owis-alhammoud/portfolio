@@ -19,7 +19,7 @@ export default function Contests() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cachedFetch<Contest[]>("https://aoueesah.pythonanywhere.com/api/contest/", 86400)
+    cachedFetch<Contest[]>("https://aoueesah.pythonanywhere.com/api/contest/",)
       .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()

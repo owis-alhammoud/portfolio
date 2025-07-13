@@ -35,10 +35,10 @@ export default function Hero() {
 
   useEffect(() => {
     Promise.all([
-      cachedFetch<Info[]>("https://aoueesah.pythonanywhere.com/api/info/", 86400),
+      cachedFetch<Info[]>("https://aoueesah.pythonanywhere.com/api/info/", ),
       cachedFetch<Social[]>(
         "https://aoueesah.pythonanywhere.com/api/social-network/",
-        86400
+        
       ),
     ])
       .then(([infoData, socialData]: [Info[], Social[]]) => {
