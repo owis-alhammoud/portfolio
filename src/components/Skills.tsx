@@ -4,6 +4,7 @@ import {
   CircularProgressbar,
   buildStyles
 } from 'react-circular-progressbar';
+import { cachedFetch } from "../utils/cachedFetch";
 import 'react-circular-progressbar/dist/styles.css';
 
 
@@ -23,9 +24,8 @@ export default function Skills() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/skill/")
-      .then((res) => res.json())
-      .then((data: Skill[]) => setSkills(data))
+    cachedFetch<Skill[]>("https://aoueesah.pythonanywhere.com/api/skill/", 86400)
+      .then((data) => setSkills(data))
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { cachedFetch } from "../utils/cachedFetch";
 
 interface Experience {
   id: number;
@@ -32,9 +33,8 @@ export default function Experience() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/experience/")
-      .then((res) => res.json())
-      .then((data: Experience[]) => {
+    cachedFetch<Experience[]>("https://aoueesah.pythonanywhere.com/api/experience/", 86400)
+      .then((data) => {
         const sorted = data.sort(
           (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
         );

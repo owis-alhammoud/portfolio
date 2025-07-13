@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { cachedFetch } from "../utils/cachedFetch";
 
 interface Language {
   id: number;
@@ -12,9 +13,8 @@ export default function About() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/lang/")
-      .then((res) => res.json())
-      .then((data: Language[]) => setLangs(data))
+    cachedFetch<Language[]>("https://aoueesah.pythonanywhere.com/api/lang/", 86400)
+      .then((data) => setLangs(data))
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

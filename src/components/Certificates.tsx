@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
+import { cachedFetch } from "../utils/cachedFetch";
 
 interface Certificate {
   id: number;
@@ -19,9 +20,11 @@ export default function Certificates() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://aoueesah.pythonanywhere.com/api/scintific-certificate/")
-      .then((res) => res.json())
-      .then((data: Certificate[]) =>
+    cachedFetch<Certificate[]>(
+      "https://aoueesah.pythonanywhere.com/api/scintific-certificate/",
+      86400
+    )
+      .then((data) =>
         setCerts(data.map((c) => ({ ...c, img: toCorsUrl(c.img) })))
       )
       .catch(() => {})

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl } from "../utils/url";
+import { cachedFetch } from "../utils/cachedFetch";
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
 interface Info {
@@ -34,11 +35,10 @@ export default function Hero() {
 
   useEffect(() => {
     Promise.all([
-      fetch("https://aoueesah.pythonanywhere.com/api/info/").then((res) =>
-        res.json()
-      ),
-      fetch("https://aoueesah.pythonanywhere.com/api/social-network/").then((res) =>
-        res.json()
+      cachedFetch<Info[]>("https://aoueesah.pythonanywhere.com/api/info/", 86400),
+      cachedFetch<Social[]>(
+        "https://aoueesah.pythonanywhere.com/api/social-network/",
+        86400
       ),
     ])
       .then(([infoData, socialData]: [Info[], Social[]]) => {
