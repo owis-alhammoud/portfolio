@@ -29,6 +29,18 @@ body {
   @apply bg-[var(--bg)] text-[var(--text)] font-sans antialiased;
 }
 
+/* Hide default vertical scrollbars */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
