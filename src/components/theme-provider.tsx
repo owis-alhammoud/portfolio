@@ -91,7 +91,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           </button>
         </nav>
       )}
-      <main className="pt-20">{children}</main>
+      <main >{children}</main>
     </>
   );
 }
