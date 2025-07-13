@@ -36,8 +36,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <>
       <header className="fixed top-0 w-full p-4 flex justify-between items-center bg-[var(--bg)] z-10 shadow">
-        <a href="#home" className="font-bold text-[var(--accent)]">Portfolio</a>
-        <nav className="hidden md:flex space-x-4 items-center">
+        <a href="#home" className=" font-bold text-[var(--accent)]">Owis Alhammoud</a>
+        <nav className="hidden flex-1 md:flex space-x-4 items-center justify-center ">
           {links.map((l) => (
             <a key={l.id} href={`#${l.id}`} className="hover:text-[var(--accent)]">
               {l.label}
