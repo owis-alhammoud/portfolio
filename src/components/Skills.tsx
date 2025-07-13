@@ -46,7 +46,7 @@ export default function Skills() {
             <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2">
             {Object.entries(categories).map(([cat, skills]) => (
              /* <div key={cat} className="p-4 border-1 border-[var(--accent)] border-dashed rounded-4xl space-y-4">
                 <h3 className="text-2xl font-semibold ">{cat}</h3>
@@ -80,7 +80,7 @@ export default function Skills() {
                 {/* Content */}
                 <div className="space-y-4 ">
                 <h3 className="text-2xl  font-semibold  ">{cat}</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                <div className="grid md:grid-cols-3 grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                   {skills.map((skill) => (
                     <div key={skill.id} className="group relative w-24 h-24 mx-auto transform transition-transform duration-300  hover:scale-110">
                     <CircularProgressbar
