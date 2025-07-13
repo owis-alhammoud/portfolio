@@ -49,13 +49,14 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
               {l.label}
             </a>
           ))}
-          <button
+           </nav>
+           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="p-2 rounded-full bg-[var(--accent)] text-[var(--bg)] ml-2"
           >
             {theme === 'light' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}  </button>
-        </nav>
+       
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
