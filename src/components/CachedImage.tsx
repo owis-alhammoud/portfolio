@@ -12,7 +12,6 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
     const cached = localStorage.getItem(key);
     if (cached) {
       setImgSrc(cached);
-      console.log("get from cached "+src)
       return;
     }
 
@@ -24,7 +23,6 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
           const base64 = reader.result as string;
           try {
             localStorage.setItem(key, base64);
-            console.log("saved cached "+src)
 
           } catch {
             // storage full or disabled
