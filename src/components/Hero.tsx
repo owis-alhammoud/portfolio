@@ -108,7 +108,7 @@ export default function Hero() {
               <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-2">
                 {socials.map((s) => (
                   <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer">
-                    <CachedImage src={s.icon} alt="icon" className="w-6 h-6" />
+                    <CachedImage src={s.icon} alt="icon" className="w-6 h-6 transform transition-transform duration-300 hover:scale-105" />
                   </a>
                 ))}
               </div>
