@@ -4,6 +4,7 @@ import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
 import { cachedFetch } from "../utils/cachedFetch";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface TrainingCourse {
   id: number;
@@ -18,6 +19,7 @@ export default function TrainingCourses() {
   const [courses, setCourses] = useState<TrainingCourse[]>([]);
   const [loading, setLoading] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<TrainingCourse[]>("https://aoueesah.pythonanywhere.com/api/tranning-course/", )
@@ -42,7 +44,7 @@ export default function TrainingCourses() {
   };
 
   return (
-    <section id="training" className="min-h-screen flex flex-col overflow-visible items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="training" className="min-h-screen flex flex-col overflow-visible items-center justify-center fade-in-up">
       <div className="container mx-auto space-y-8 overflow-visible">
         <h2 className="text-3xl font-bold text-center">Training Courses</h2>
         {loading ? (

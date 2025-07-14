@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
 import { cachedFetch } from "../utils/cachedFetch";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Certificate {
   id: number;
@@ -18,6 +19,7 @@ interface Certificate {
 export default function Certificates() {
   const [certs, setCerts] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<Certificate[]>(
@@ -31,7 +33,7 @@ export default function Certificates() {
   }, []);
 
   return (
-    <section id="certificates" className="min-h-screen flex items-center justify-center ">
+    <section ref={sectionRef} id="certificates" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className=" container mx-auto px-4 text-center space-y-8">
         <h2 className="text-3xl font-bold">Scientific Certificates</h2>
         {loading ? (

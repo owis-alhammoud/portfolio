@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { cachedFetch } from "../utils/cachedFetch";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Experience {
   id: number;
@@ -31,6 +32,7 @@ function formatDuration(start: string, end: string) {
 export default function Experience() {
   const [experiences, setExperiences] = useState<Experience[]>([])
   const [loading, setLoading] = useState(true)
+  const sectionRef = useFadeIn<HTMLElement>()
 
   useEffect(() => {
     cachedFetch<Experience[]>("https://aoueesah.pythonanywhere.com/api/experience/", )
@@ -45,7 +47,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="experience" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className="container mx-auto px-4 space-y-8">
         <h2 className="text-3xl font-bold text-center">Experience</h2>
         {loading ? (

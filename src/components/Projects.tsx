@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
 import { cachedFetch } from "../utils/cachedFetch";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Tag {
   id: number;
@@ -21,6 +22,7 @@ interface Project {
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<Project[]>("https://aoueesah.pythonanywhere.com/api/project/", )
@@ -32,7 +34,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="projects" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className="container mx-auto px-4 space-y-8">
         <h2 className="text-3xl font-bold text-center">Projects</h2>
         {loading ? (
