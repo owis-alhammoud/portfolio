@@ -79,16 +79,16 @@ export default function Hero() {
   return (
     
     <section id="home" className="h-screen flex items-center justify-center fade-in-up ">
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 md:px-50">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 justify-evenly">
         
         {info && (
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex flex-col items-center">
             <CachedImage
               src={info.photo}
               alt="Avatar"
-              className="rounded-full md:p-0 p-10 object-cover float-animate w-full h-1/2"
+              className="rounded-full p-5 object-cover float-animate w-full h-1/2"
             />
-            <div className="mt-4 flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
+            <div className="mt-4 font-semibold flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <a
                 href={`tel:${info.phoneNum}`}
                 className="flex items-center space-x-2"
