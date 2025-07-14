@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { cachedFetch } from "../utils/cachedFetch";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Language {
   id: number;
@@ -11,6 +12,7 @@ interface Language {
 export default function About() {
   const [langs, setLangs] = useState<Language[]>([]);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<Language[]>("https://aoueesah.pythonanywhere.com/api/lang/",)
@@ -20,7 +22,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="about" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className="container mx-auto px-4 space-y-8">
         <h2 className="text-3xl font-bold text-center">About me</h2>
         <div className="grid gap-8 md:grid-cols-2">

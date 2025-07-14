@@ -4,6 +4,7 @@ import CachedImage from "./CachedImage";
 import { toCorsUrl, fromCorsUrl } from "../utils/url";
 import { cachedFetch } from "../utils/cachedFetch";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Contest {
   id: number;
@@ -17,6 +18,7 @@ export default function Contests() {
   const [contests, setContests] = useState<Contest[]>([]);
   const [loading, setLoading] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<Contest[]>("https://aoueesah.pythonanywhere.com/api/contest/",)
@@ -39,7 +41,7 @@ export default function Contests() {
   };
 
   return (
-    <section id="contests" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="contests" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className="container mx-auto space-y-8 overflow-visible">
         <h2 className="text-3xl font-bold text-center">Contests</h2>
         {loading ? (

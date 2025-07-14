@@ -5,6 +5,7 @@ import {
   buildStyles
 } from 'react-circular-progressbar';
 import { cachedFetch } from "../utils/cachedFetch";
+import useFadeIn from "@/utils/useFadeIn";
 import 'react-circular-progressbar/dist/styles.css';
 
 
@@ -22,6 +23,7 @@ interface Skill {
 export default function Skills() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     cachedFetch<Skill[]>("https://aoueesah.pythonanywhere.com/api/skill/", )
@@ -38,7 +40,7 @@ export default function Skills() {
   }, {});
 
   return (
-    <section id="skills" className="min-h-screen flex items-center justify-center fade-in-up">
+    <section ref={sectionRef} id="skills" className="min-h-screen flex items-center justify-center fade-in-up">
       <div className="container mx-auto px-4 text-center space-y-4">
         <h2 className="text-3xl font-bold">Skills</h2>
         {loading ? (

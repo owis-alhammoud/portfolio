@@ -4,6 +4,7 @@ import CachedImage from "./CachedImage";
 import { toCorsUrl } from "../utils/url";
 import { cachedFetch } from "../utils/cachedFetch";
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import useFadeIn from "@/utils/useFadeIn";
 
 interface Info {
   id: number;
@@ -32,6 +33,7 @@ export default function Hero() {
   const [socials, setSocials] = useState<Social[]>([]);
   const [loading, setLoading] = useState(true);
   const [titleIndex, setTitleIndex] = useState(0);
+  const sectionRef = useFadeIn<HTMLElement>();
 
   useEffect(() => {
     Promise.all([
@@ -69,7 +71,7 @@ export default function Hero() {
   }, []);
   if(loading)
   {
-    return (<section id="home" className="h-screen flex items-center justify-center fade-in-up ">{loading && (
+    return (<section ref={sectionRef} id="home" className="h-screen flex items-center justify-center fade-in-up ">{loading && (
       <div className="flex items-center justify-center w-80 h-80">
         <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
       </div>
@@ -78,7 +80,7 @@ export default function Hero() {
 
   return (
     
-    <section id="home" className="h-screen flex items-center justify-center fade-in-up ">
+    <section ref={sectionRef} id="home" className="h-screen flex items-center justify-center fade-in-up ">
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 justify-evenly">
         
         {info && (
