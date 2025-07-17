@@ -87,7 +87,7 @@ export default function Hero() {
           <div className="flex flex-col items-center">
             <CachedImage
               src={info.photo}
-              alt="Avatar"
+              alt="Owis Alhammoud portrait"
               className="rounded-full p-5 object-cover float-animate max-w-9/12 md:max-w-full lg:max-w-9/12 "
             />
             <div className="mt-4 font-semibold flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
