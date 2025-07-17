@@ -1,6 +1,7 @@
 "use client";
 import Image, { ImageProps } from "next/image";
 import { useEffect, useState } from "react";
+import { getCachedImage, setCachedImage } from "../utils/imageDb";
 
 export default function CachedImage(props: ImageProps & { alt: string }) {
   const { src, alt, ...rest } = props;
@@ -8,35 +9,43 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
 
   useEffect(() => {
     if (typeof src !== "string") return;
+    let cancelled = false;
     const key = `${src}`;
-    const cached = localStorage.getItem(key);
-    if (cached) {
-      setImgSrc(cached);
-      return;
-    }
 
-    fetch(src)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64 = reader.result as string;
-          try {
-            localStorage.setItem(key, base64);
+    getCachedImage(key)
+      .then((cached) => {
+        if (cancelled) return;
+        if (cached) {
+          setImgSrc(cached);
+          return;
+        }
 
-          } catch {
-            // storage full or disabled
-          }
-          setImgSrc(base64);
-        };
-        reader.readAsDataURL(blob);
+        fetch(src)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              const base64 = reader.result as string;
+              setCachedImage(key, base64).catch(() => {});
+              if (!cancelled) setImgSrc(base64);
+            };
+            reader.readAsDataURL(blob);
+          })
+          .catch(() => {
+            if (!cancelled && typeof src === "string") {
+              setImgSrc(src);
+            }
+          });
       })
       .catch(() => {
-        // failed to fetch due to CORS or network, fall back to original src
-        if (typeof src === "string") {
+        if (!cancelled && typeof src === "string") {
           setImgSrc(src);
         }
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, [src]);
 
   return <Image unoptimized width={1000}   height={1000}  loading="lazy" src={imgSrc} alt={alt} {...rest} />;
