@@ -1,7 +1,7 @@
 "use client";
 import Image, { ImageProps } from "next/image";
 import { useEffect, useState } from "react";
-import { getCachedImage, setCachedImage } from "../utils/imageDb";
+import { getCachedImage, setCachedImage } from "../utils/imageCache";
 
 export default function CachedImage(props: ImageProps & { alt: string }) {
   const { src, alt, ...rest } = props;
