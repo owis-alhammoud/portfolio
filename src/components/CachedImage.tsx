@@ -10,26 +10,28 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
   useEffect(() => {
     if (typeof src !== "string") return;
     let cancelled = false;
+    let objectUrl: string | undefined;
     const key = `${src}`;
 
     getCachedImage(key)
       .then((cached) => {
         if (cancelled) return;
         if (cached) {
-          setImgSrc(cached);
+          objectUrl = URL.createObjectURL(cached);
+          setImgSrc(objectUrl);
           return;
         }
 
         fetch(src)
-          .then((res) => res.blob())
+          .then((res) => {
+            if (!res.ok) throw new Error("failed");
+            setCachedImage(key, res.clone()).catch(() => {});
+            return res.blob();
+          })
           .then((blob) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              const base64 = reader.result as string;
-              setCachedImage(key, base64).catch(() => {});
-              if (!cancelled) setImgSrc(base64);
-            };
-            reader.readAsDataURL(blob);
+            if (cancelled) return;
+            objectUrl = URL.createObjectURL(blob);
+            setImgSrc(objectUrl);
           })
           .catch(() => {
             if (!cancelled && typeof src === "string") {
@@ -45,6 +47,9 @@ export default function CachedImage(props: ImageProps & { alt: string }) {
 
     return () => {
       cancelled = true;
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
     };
   }, [src]);
 

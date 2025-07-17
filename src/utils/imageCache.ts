@@ -7,12 +7,12 @@ async function getCache(): Promise<Cache> {
   return caches.open(CACHE_NAME)
 }
 
-export async function getCachedImage(key: string): Promise<string | undefined> {
+export async function getCachedImage(key: string): Promise<Blob | undefined> {
   try {
     const cache = await getCache()
     const res = await cache.match(key)
     if (res) {
-      return await res.text()
+      return await res.blob()
     }
   } catch {
     // ignore
@@ -20,10 +20,10 @@ export async function getCachedImage(key: string): Promise<string | undefined> {
   return undefined
 }
 
-export async function setCachedImage(key: string, data: string) {
+export async function setCachedImage(key: string, response: Response) {
   try {
     const cache = await getCache()
-    await cache.put(key, new Response(data))
+    await cache.put(key, response)
   } catch {
     // ignore
   }
