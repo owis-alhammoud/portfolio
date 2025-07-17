@@ -14,8 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Modern portfolio",
+  title: "Owis Alhammoud | Portfolio",
+  description: "Personal portfolio of software engineer Owis Alhammoud.",
+  keywords: [
+    "Owis alhammoud",
+    "Owis",
+    "ENG.Owis",
+    "اويس الحمود",
+    "المهندس اويس",
+    "اويس",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
